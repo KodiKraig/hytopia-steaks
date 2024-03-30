@@ -1,0 +1,21 @@
+# Keep environment variables out of version control
+.env*
+
+# Swagger JSON
+/public/swagger.json
+
+# Code Coverage
+/coverage
+
+# VS Code
+.vscode
+
+# Build
+/dist
+/node_modules
+
+# Local logs
+/logs
+
+# Mac Filesystem
+.DS_Store
