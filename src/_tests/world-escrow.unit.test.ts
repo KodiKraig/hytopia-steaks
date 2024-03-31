@@ -1,7 +1,7 @@
-import { WorldEscrowAPI } from "./WorldEscrowAPI"
+import { WorldEscrowAPI } from "../world-escrow"
 import { mock, MockProxy } from "jest-mock-extended"
 import { ethers, Result } from "ethers"
-import { WorldInfo } from "./types"
+import { WorldInfo } from "../types"
 
 describe("WorldEscrowAPI unit tests", () => {
   var contract: MockProxy<ethers.Contract>

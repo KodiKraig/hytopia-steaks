@@ -39,6 +39,7 @@ Install the library
 - ✅ [Worlds Staking Contract](https://etherscan.io/address/0x2f53e033c55eb6c87cea259123c0a68ca3578426)
 - ☑️ [Worlds NFT Contract](https://etherscan.io/token/0x8d9710f0e193d3f95c0723eaaf1a81030dc9116d)
 - ☑️ LP Staking Contract - TBD
+- ☑️ Node Staking Contract - TBD
 - ☑️ Avatar Staking Contract - TBD
 - ☑️ [Avatar NFT Contract](https://etherscan.io/address/0x05745e72fb8b4a9b51118a168d956760e4a36444)
 
