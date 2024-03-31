@@ -14,14 +14,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run tests
-        uses: ./.github/actions/setup-test
+      - name: Use Node.js
+        uses: actions/setup-node@v2
         with:
-          infura_project_id: ${{ secrets.INFURA_PROJECT_ID }}
-          test_owner_world_token_id: ${{ secrets.TEST_OWNER_WORLD_TOKEN_ID }}
-          test_owner_world_address: ${{ secrets.TEST_OWNER_WORLD_ADDRESS }}
+          node-version: "18"
 
-      - name: Upload coverage reports to Codecov
-        uses: ./.github/actions/upload-codecov
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:all
+        env:
+          INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+          TEST_OWNER_WORLD_TOKEN_ID: ${{ secrets.TEST_OWNER_WORLD_TOKEN_ID }}
+          TEST_OWNER_WORLD_ADDRESS: ${{ secrets.TEST_OWNER_WORLD_ADDRESS }}
+
+      - name: "Upload Coverage"
+        uses: codecov/codecov-action@v4.0.1
         with:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: KodiKraig/hytopia-steaks
