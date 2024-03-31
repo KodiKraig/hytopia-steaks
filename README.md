@@ -4,13 +4,25 @@
   <img src="https://pbs.twimg.com/profile_images/1683869553238106112/a315BhPh_400x400.jpg" alt="Your image description" width="150" height="150">
 </p>
 
+
+<div align="center">
+    <img alt="NPM Version" src="https://img.shields.io/npm/v/hytopia-steaks">
+    <a href="https://codecov.io/gh/KodiKraig/hytopia-steaks" > 
+        <img src="https://codecov.io/gh/KodiKraig/hytopia-steaks/graph/badge.svg?token=QOE1CZRH3X"/> 
+    </a>
+</div>
+
+<br>
+
 <p align="center">
-  A wrapper library around <a href="https://hytopia.com/">HYTOPIA</a> contracts with helper functions to help calculate staking status across the various assets within the ecosystem.
+  <strong>A wrapper library around <a href="https://hytopia.com/">HYTOPIA</a> contracts with helper functions to help calculate staking status across the various assets within the ecosystem.</strong>
 </p>
 
 <p align="center">
   <em>This is a community repository. Not directly affiliated with HYTOPIA.</em>
 </p>
+
+<br>
 
 ## Dependencies
 
