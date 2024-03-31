@@ -1,7 +1,7 @@
 import { ethers } from "ethers"
-import { WorldEscrowAPI } from "./WorldEscrowAPI"
-import { WorldStakeEvent } from "./types"
-import { getWorldEscrowContract } from "./contracts"
+import { WorldEscrowAPI } from "../world-escrow"
+import { WorldStakeEvent } from "../types"
+import { getWorldEscrowContract } from "../contracts"
 
 const STARTING_BLOCK = 19521249
 const ENDING_BLOCK = 19539433
