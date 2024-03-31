@@ -47,7 +47,7 @@ Install the library
 
 - Create instance of the `WorldEscrowAPI`
 
-```
+```javascript
     import { ethers } from 'ethers'
     import { getWorldEscrowContract, WorldEscrowAPI } from 'hytopia-steaks'
 
@@ -58,7 +58,7 @@ Install the library
 
 - World info by token ID with owner and associated metadata
 
-```
+```javascript
     const worldInfo = await api.getWorldInfo(999)
 
     console.log(worldInfo)
@@ -73,7 +73,7 @@ Install the library
 
 - Check total claimable $TOPIA user rewards by address
 
-```
+```javascript
     const rewards = await api.checkUserRewards('0x12345')
 
     console.log(rewards)
@@ -82,7 +82,7 @@ Install the library
 
 - Get staked tokens by user address
 
-```
+```javascript
     const tokenIds = await api.getUserStakedTokens('0x12345')
 
     console.log(tokenIds)
@@ -91,7 +91,7 @@ Install the library
 
 - Get all staked tokens by events
 
-```
+```javascript
     const events = api.getAllStakedTokensByEvents()
 
     console.log(events)
