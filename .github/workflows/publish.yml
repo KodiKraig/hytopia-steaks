@@ -1,14 +1,14 @@
-name: Run Tests
+name: Test & Publish
 
 on:
-  pull_request:
+  push:
     branches:
-      - "**"
+      - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    environment: Test
+    environment: Production
 
     steps:
       - name: Run tests
@@ -16,3 +16,8 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         uses: ./.github/actions/upload-codecov
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
