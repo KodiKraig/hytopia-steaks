@@ -16,6 +16,12 @@ jobs:
 
       - name: Run tests
         uses: ./.github/actions/setup-test
+        with:
+          infura_project_id: ${{ secrets.INFURA_PROJECT_ID }}
+          test_owner_world_token_id: ${{ secrets.TEST_OWNER_WORLD_TOKEN_ID }}
+          test_owner_world_address: ${{ secrets.TEST_OWNER_WORLD_ADDRESS }}
 
       - name: Upload coverage reports to Codecov
         uses: ./.github/actions/upload-codecov
+        with:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

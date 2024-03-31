@@ -2,9 +2,15 @@ name: "Publish Code Coverage"
 description: "Publish code coverage to Codecov"
 runs:
   using: "composite"
+  
   steps:
     - name: "Upload Coverage"
       uses: codecov/codecov-action@v4.0.1
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+        token: ${{ inputs.CODECOV_TOKEN }}
         slug: KodiKraig/hytopia-steaks
+
+  inputs:
+    CODECOV_TOKEN:
+      description: 'Codecov token'
+      required: true
