@@ -11,6 +11,9 @@ jobs:
     environment: Production
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Run tests
         uses: ./.github/actions/setup-test
 
