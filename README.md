@@ -215,6 +215,7 @@ In order to run the integration tests locally you must provide an [INFURA](https
     - `HYCHAIN_JSON_RPC_URL=https://hychain.calderachain.xyz/http`
     - `TEST_OWNER_WORLD_ADDRESS=<Address owning a HYTOPIA world token>`
     - `TEST_OWNER_WORLD_TOKEN_ID=<TokenId that is currently staked by the above owner address>`
+    - `TEST_NODE_KEY_OWNER_ADDRESS=<Address owning at least one Node Key>`
     - `TEST_NODE_ID_WITH_REWARDS=<TokenId that currently has rewards claimed and claimable>`
 
 2. Run the integration tests:
