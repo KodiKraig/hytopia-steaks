@@ -1,0 +1,1283 @@
+{
+  "contract": {
+    "name": "NodeReferee",
+    "address": "0x6c065572f1824171186aF6dF848313784d6E5b0E",
+    "abi": [
+      {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "target",
+            "type": "address"
+          }
+        ],
+        "name": "AddressEmptyCode",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "implementation",
+            "type": "address"
+          }
+        ],
+        "name": "ERC1967InvalidImplementation",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ERC1967NonPayable",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "FailedInnerCall",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "InvalidInitialization",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotInitializing",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnableInvalidOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "OwnableUnauthorizedAccount",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "UUPSUnauthorizedCallContext",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "slot",
+            "type": "bytes32"
+          }
+        ],
+        "name": "UUPSUnsupportedProxiableUUID",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint64",
+            "name": "version",
+            "type": "uint64"
+          }
+        ],
+        "name": "Initialized",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint256",
+            "name": "batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "indexed": true,
+            "internalType": "uint256",
+            "name": "nodeKeyId",
+            "type": "uint256"
+          }
+        ],
+        "name": "NodeKeyRevoked",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint256",
+            "name": "nodeKeyId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "revoked",
+            "type": "bool"
+          }
+        ],
+        "name": "SetNodeKeyRevoked",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "implementation",
+            "type": "address"
+          }
+        ],
+        "name": "Upgraded",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "DelegateRegistry",
+        "outputs": [
+          {
+            "internalType": "contract IDelegateRegistry",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "UPGRADE_INTERFACE_VERSION",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "batchReward",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "blocklist",
+        "outputs": [
+          {
+            "internalType": "contract Blocklist",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "challengePeriod",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "challenger",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "challenges",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "closedTimestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "verified",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "start",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "end",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "seed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "startBlockHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "startSendRoot",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "endBlockHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "endSendRoot",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "auxDataHash",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_nodeKeyId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_n",
+            "type": "uint256"
+          }
+        ],
+        "name": "claimLatestRewards",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "_nodeKeyIds",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_n",
+            "type": "uint256"
+          }
+        ],
+        "name": "claimLatestRewardsBatched",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "currentSeed",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "currentStartIndex",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "firstBatchSequenceNumber",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "firstOpenChallenge",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_nodeKeyId",
+            "type": "uint256"
+          }
+        ],
+        "name": "firstOpenChallengeForNodeKey",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "firstUnclaimedAssertion",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "firstUnverifiedChallenge",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          }
+        ],
+        "name": "getAllAssertionsByChallenge",
+        "outputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "_nodeKeyIds",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "getAssertionStatusByChallenge",
+        "outputs": [
+          {
+            "internalType": "bool[]",
+            "name": "",
+            "type": "bool[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          }
+        ],
+        "name": "getChallenge",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "closedTimestamp",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "verified",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "reward",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "start",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "end",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "seed",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "startBlockHash",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "startSendRoot",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "endBlockHash",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "endSendRoot",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "auxDataHash",
+                "type": "bytes32"
+              }
+            ],
+            "internalType": "struct Referee.Challenge",
+            "name": "",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getLatestChallenge",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "closedTimestamp",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "verified",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "reward",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "start",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "end",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "seed",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "startBlockHash",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "startSendRoot",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "endBlockHash",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "endSendRoot",
+                "type": "bytes32"
+              },
+              {
+                "internalType": "bytes32",
+                "name": "auxDataHash",
+                "type": "bytes32"
+              }
+            ],
+            "internalType": "struct Referee.Challenge",
+            "name": "",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_nodeKeyId",
+            "type": "uint256"
+          }
+        ],
+        "name": "getNodeKeyAssertionByChallenge",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "_nodeKeyIds",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "getRewardClaimedBatched",
+        "outputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_delegateRegistryAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_l2NodeKeyAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_blocklistAddress",
+            "type": "address"
+          }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "isNodeKeyRevoked",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "l2NodeKey",
+        "outputs": [
+          {
+            "internalType": "contract L2NodeKey",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "latestBatchSequenceNumber",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_nodeKeyId",
+            "type": "uint256"
+          }
+        ],
+        "name": "maxRewardsToClaim",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "_nodeKeyId",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "maxRewardsToClaimBatched",
+        "outputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "minBatchReward",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "nodeKeyAssertionMap",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "numAssertions",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "proxiableUUID",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "rewardClaimed",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "rewardDecreaseDenominator",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "rewardDistributed",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "rewardIncreaseDenominator",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "rewardPerSecond",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_targetAssertionInterval",
+            "type": "uint256"
+          }
+        ],
+        "name": "setAssertionInterval",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchReward",
+            "type": "uint256"
+          }
+        ],
+        "name": "setBatchReward",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_challengePeriod",
+            "type": "uint256"
+          }
+        ],
+        "name": "setChallengePeriod",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_challenger",
+            "type": "address"
+          }
+        ],
+        "name": "setChallenger",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_minBatchReward",
+            "type": "uint256"
+          }
+        ],
+        "name": "setMinBatchReward",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_nodeKeyId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isRevoked",
+            "type": "bool"
+          }
+        ],
+        "name": "setNodeKeyRevoked",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_rewardIncreaseDenominator",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_rewardDecreaseDenominator",
+            "type": "uint256"
+          }
+        ],
+        "name": "setRewardDenominator",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_rewardPerSecond",
+            "type": "uint256"
+          }
+        ],
+        "name": "setRewardPerSecond",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_version",
+            "type": "uint256"
+          }
+        ],
+        "name": "setVersion",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "startTime",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_nodeKeyId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_auxDataHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_assertion",
+            "type": "uint256"
+          }
+        ],
+        "name": "submitAssertion",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_auxDataHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "_nodeKeyIds",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "_assertions",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "submitAssertionBatched",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_startBlockHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_startSendRoot",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_endBlockHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_endSendRoot",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "_auxDataHash",
+            "type": "bytes32"
+          }
+        ],
+        "name": "submitChallenge",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "targetAssertionInterval",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "newImplementation",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          }
+        ],
+        "name": "upgradeToAndCall",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_batchSequenceNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "_nodeKeysToRevoke",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "verifyChallenge",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "version",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "stateMutability": "payable",
+        "type": "receive"
+      }
+    ]
+  }
+}

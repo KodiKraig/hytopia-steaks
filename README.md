@@ -36,16 +36,17 @@ Install the library
 
 ## Roadmap
 
-- ✅ [Worlds Staking Contract](https://etherscan.io/address/0x2f53e033c55eb6c87cea259123c0a68ca3578426)
-- ☑️ [Worlds NFT Contract](https://etherscan.io/token/0x8d9710f0e193d3f95c0723eaaf1a81030dc9116d)
-- ☑️ LP Staking Contract - TBD
-- ☑️ Node Staking Contract - TBD
-- ☑️ Avatar Staking Contract - TBD
-- ☑️ [Avatar NFT Contract](https://etherscan.io/address/0x05745e72fb8b4a9b51118a168d956760e4a36444)
+- [x] [Worlds Staking Contract](https://etherscan.io/address/0x2f53e033c55eb6c87cea259123c0a68ca3578426)
+- [x] [HYCHAIN Node Referee Contract](https://explorer.hychain.com/address/0x6c065572f1824171186aF6dF848313784d6E5b0E)
+- [ ] [HYCHAIN Node NFT Contract](https://explorer.hychain.com/address/0xE1060b30D9fF01Eef71248906Ce802801a670A48?)
+- [ ] [Worlds NFT Contract](https://etherscan.io/token/0x8d9710f0e193d3f95c0723eaaf1a81030dc9116d)
+- [ ] LP Staking Contract - TBD
+- [ ] Avatar Staking Contract - TBD
+- [ ] [Avatar NFT Contract](https://etherscan.io/address/0x05745e72fb8b4a9b51118a168d956760e4a36444)
 
 ## API
 
-- Create instance of the `WorldEscrowAPI`
+Create instance of the `WorldEscrowAPI`
 
 ```javascript
     import { ethers } from 'ethers'
@@ -56,7 +57,7 @@ Install the library
     const api = new WorldEscrowAPI(contract)
 ```
 
-- World info by token ID with owner and associated metadata
+World info by token ID with owner and associated metadata
 
 ```javascript
     const worldInfo = await api.getWorldInfo(999)
@@ -71,7 +72,7 @@ Install the library
     // }
 ```
 
-- Check total claimable $TOPIA user rewards by address
+Check total claimable $TOPIA user rewards by address
 
 ```javascript
     const rewards = await api.checkUserRewards('0x12345')
@@ -80,7 +81,7 @@ Install the library
     // 999.99 $TOPIA
 ```
 
-- Get staked tokens by user address
+Get staked tokens by user address
 
 ```javascript
     const tokenIds = await api.getUserStakedTokens('0x12345')
@@ -89,7 +90,7 @@ Install the library
     // [123, 456, 999]
 ```
 
-- Get all staked tokens by events
+Get all staked tokens by events
 
 ```javascript
     const events = api.getAllStakedTokensByEvents()
@@ -130,8 +131,10 @@ In order to run the integration tests locally you must provide an [INFURA](https
 
 1. Create a .env file and add the following variables:
     - `INFURA_PROJECT_ID=<Your API Key>`
+    - `HYCHAIN_JSON_RPC_URL=https://hychain.calderachain.xyz/http`
     - `TEST_OWNER_WORLD_ADDRESS=<Address owning a HYTOPIA world token>`
     - `TEST_OWNER_WORLD_TOKEN_ID=<TokenId that is currently staked by the above owner address>`
+    - `TEST_NODE_ID_WITH_REWARDS=<TokenId that currently has rewards claimed and claimable>`
 
 2. Run the integration tests:
     - `npm run test:integration`
