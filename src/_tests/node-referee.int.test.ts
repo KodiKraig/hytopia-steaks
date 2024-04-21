@@ -6,6 +6,7 @@ describe("NodeRefereeAPI", () => {
   var api: NodeRefereeAPI
 
   beforeEach(() => {
+    console.log("HYCHAIN_JSON_RPC_URL", process.env.HYCHAIN_JSON_RPC_URL)
     const provider = new ethers.JsonRpcProvider(process.env.HYCHAIN_JSON_RPC_URL)
     const contact = getNodeRefereeContract(provider)
     api = new NodeRefereeAPI(contact)
