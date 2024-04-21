@@ -15,7 +15,7 @@
 <br>
 
 <p align="center">
-  <strong>A wrapper library around <a href="https://hytopia.com/">HYTOPIA</a> contracts with helper functions to help calculate staking status across the various assets within the ecosystem.</strong>
+  <strong>A wrapper library for <a href="https://hytopia.com/">HYTOPIA</a> and <a href="https://explorer.hychain.com/">HYCHAIN</a> contracts with helper functions to help calculate staking status rewards across the various assets within the ecosystem.</strong>
 </p>
 
 <p align="center">
