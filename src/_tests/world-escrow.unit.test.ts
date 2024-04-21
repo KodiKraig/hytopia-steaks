@@ -1,7 +1,6 @@
-import { WorldEscrowAPI } from "../world-escrow"
+import { WorldEscrowAPI, WorldInfo } from "../world-escrow"
 import { mock, MockProxy } from "jest-mock-extended"
 import { ethers, Result } from "ethers"
-import { WorldInfo } from "../types"
 
 describe("WorldEscrowAPI unit tests", () => {
   var contract: MockProxy<ethers.Contract>
@@ -48,7 +47,7 @@ describe("WorldEscrowAPI unit tests", () => {
 
     const userRewards = await worldEscrowAPI.checkUserRewards("0x1234")
 
-    expect(userRewards).toEqual(ethers.formatEther("9213193929392922"))
+    expect(userRewards).toEqual("9213193929392922")
     expect(contract.checkUserRewards).toHaveBeenCalledWith("0x1234")
   })
 

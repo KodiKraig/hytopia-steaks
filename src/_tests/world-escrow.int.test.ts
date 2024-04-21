@@ -1,6 +1,5 @@
 import { ethers } from "ethers"
-import { WorldEscrowAPI } from "../world-escrow"
-import { WorldStakeEvent } from "../types"
+import { WorldEscrowAPI, WorldStakeEvent } from "../world-escrow"
 import { getWorldEscrowContract } from "../contracts"
 
 const STARTING_BLOCK = 19521249

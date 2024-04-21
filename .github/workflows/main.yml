@@ -29,8 +29,11 @@ jobs:
         run: npm run test:all
         env:
           INFURA_PROJECT_ID: ${{ secrets.INFURA_PROJECT_ID }}
+          HYCHAIN_JSON_RPC_URL: ${{ secrets.HYCHAIN_JSON_RPC_URL }}
           TEST_OWNER_WORLD_TOKEN_ID: ${{ secrets.TEST_OWNER_WORLD_TOKEN_ID }}
           TEST_OWNER_WORLD_ADDRESS: ${{ secrets.TEST_OWNER_WORLD_ADDRESS }}
+          TEST_NODE_KEY_OWNER_ADDRESS: ${{ secrets.TEST_NODE_KEY_OWNER_ADDRESS }}
+          TEST_NODE_ID_WITH_REWARDS: ${{ secrets.TEST_NODE_ID_WITH_REWARDS }}
 
       - name: "Upload Coverage"
         uses: codecov/codecov-action@v4.0.1
