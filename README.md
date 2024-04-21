@@ -52,7 +52,7 @@ The APIs are a thin wrapper around the contracts designed to get you up and goin
 
 Create instance of the Node Referee contract.
 
-__This is the contract responsible for emitting rewards for the HYCHAIN Guardian Nodes.__
+**This is the contract responsible for emitting rewards for the HYCHAIN Guardian Nodes.**
 
 ```javascript
     import { ethers } from 'ethers'
