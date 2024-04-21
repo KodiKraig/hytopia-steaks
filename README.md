@@ -159,7 +159,7 @@ Check total claimable $TOPIA user rewards by address
     const rewards = await api.checkUserRewards('0x12345')
 
     console.log(rewards)
-    // 999.99 $TOPIA
+    // 2131242345243 $TOPIA
 ```
 
 Get staked tokens by user address

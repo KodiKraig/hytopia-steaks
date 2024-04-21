@@ -47,7 +47,7 @@ describe("WorldEscrowAPI unit tests", () => {
 
     const userRewards = await worldEscrowAPI.checkUserRewards("0x1234")
 
-    expect(userRewards).toEqual(ethers.formatEther("9213193929392922"))
+    expect(userRewards).toEqual("9213193929392922")
     expect(contract.checkUserRewards).toHaveBeenCalledWith("0x1234")
   })
 

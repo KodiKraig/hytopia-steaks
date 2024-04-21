@@ -70,8 +70,7 @@ export class WorldEscrowAPI {
    * @returns $TOPIA rewards that are claimable for given address
    */
   async checkUserRewards(user: string): Promise<ethers.BigNumberish> {
-    const rewards = await this.worldsEscrow.checkUserRewards(user)
-    return ethers.formatEther(rewards)
+    return this.worldsEscrow.checkUserRewards(user)
   }
 
   /**
