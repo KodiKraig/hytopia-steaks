@@ -1,27 +1,27 @@
 import { ethers } from "ethers"
-import { getNodeRefereeContract } from "../contracts"
-import { NodeRefereeAPI } from "../node-referee"
+import { getHYCHAINNodeRefereeContract } from "../contracts"
+import { HYCHAINNodeRefereeAPI } from "../hychain-node-referee"
+
+const NODE_KEY_ID = Number(process.env.TEST_NODE_ID_WITH_REWARDS)
 
 describe("NodeRefereeAPI", () => {
-  var api: NodeRefereeAPI
+  var api: HYCHAINNodeRefereeAPI
 
   beforeEach(() => {
     const provider = new ethers.JsonRpcProvider(process.env.HYCHAIN_JSON_RPC_URL)
-    const contact = getNodeRefereeContract(provider)
-    api = new NodeRefereeAPI(contact)
+    const contact = getHYCHAINNodeRefereeContract(provider)
+    api = new HYCHAINNodeRefereeAPI(contact)
   })
 
   /// Claimable Rewards
 
   it("should check user rewards", async () => {
-    const userRewards = await api.claimableNodeKeyRewards(process.env.TEST_NODE_ID_WITH_REWARDS)
+    const userRewards = await api.claimableNodeKeyRewards(NODE_KEY_ID)
     expect(Number(userRewards)).toBeGreaterThan(0)
   })
 
   it("should check batched claimable rewards", async () => {
-    const batchedRewards = await api.claimableNodeKeyRewardsBatched([
-      process.env.TEST_NODE_ID_WITH_REWARDS,
-    ])
+    const batchedRewards = await api.claimableNodeKeyRewardsBatched([NODE_KEY_ID])
     expect(batchedRewards.length).toBe(1)
     expect(batchedRewards[0]).toBeGreaterThan(0)
   })
@@ -29,14 +29,12 @@ describe("NodeRefereeAPI", () => {
   /// Claimed Rewards
 
   it("should check claimed rewards", async () => {
-    const claimedRewards = await api.claimedNodeKeyRewards(process.env.TEST_NODE_ID_WITH_REWARDS)
+    const claimedRewards = await api.claimedNodeKeyRewards(NODE_KEY_ID)
     expect(Number(claimedRewards)).toBeGreaterThan(0)
   })
 
   it("should check batched claimed rewards", async () => {
-    const batchedRewards = await api.claimedNodeKeyRewardsBatched([
-      process.env.TEST_NODE_ID_WITH_REWARDS,
-    ])
+    const batchedRewards = await api.claimedNodeKeyRewardsBatched([NODE_KEY_ID])
     expect(batchedRewards.length).toBe(1)
     expect(batchedRewards[0]).toBeGreaterThan(0)
   })
@@ -56,14 +54,14 @@ describe("NodeRefereeAPI", () => {
   /// Assertions
 
   it("should check total assertions", async () => {
-    const totalAssertions = await api.totalNodeKeyAssertions(process.env.TEST_NODE_ID_WITH_REWARDS)
+    const totalAssertions = await api.totalNodeKeyAssertions(NODE_KEY_ID)
     expect(Number(totalAssertions)).toBeGreaterThan(0)
   })
 
   /// Status
 
   it("should check if node key is revoked", async () => {
-    const isRevoked = await api.isNodeKeyRevoked(process.env.TEST_NODE_ID_WITH_REWARDS)
+    const isRevoked = await api.isNodeKeyRevoked(NODE_KEY_ID)
     expect(isRevoked).toBe(false)
   })
 })

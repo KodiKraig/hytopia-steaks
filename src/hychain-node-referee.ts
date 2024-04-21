@@ -4,7 +4,7 @@ import { ethers } from "ethers"
  * NodeRefereeAPI is a class that provides an interface to interact with the HYCHAIN NodeReferee contract
  * @param contract NodeReferee contract instance
  */
-export class NodeRefereeAPI {
+export class HYCHAINNodeRefereeAPI {
   private nodeReferee: ethers.Contract
 
   constructor(contract: ethers.Contract) {
@@ -18,7 +18,7 @@ export class NodeRefereeAPI {
    * @param tokenId Node key ID
    * @returns True if the node key is revoked, false otherwise
    */
-  async isNodeKeyRevoked(tokenId: string): Promise<boolean> {
+  async isNodeKeyRevoked(tokenId: number): Promise<boolean> {
     return await this.nodeReferee.isNodeKeyRevoked(tokenId)
   }
 
@@ -29,7 +29,7 @@ export class NodeRefereeAPI {
    * @param tokenId Node key ID
    * @returns $TOPIA rewards that are claimable for given node key
    */
-  async claimableNodeKeyRewards(tokenId: string): Promise<ethers.BigNumberish> {
+  async claimableNodeKeyRewards(tokenId: number): Promise<ethers.BigNumberish> {
     return await this.nodeReferee.maxRewardsToClaim(tokenId)
   }
 
@@ -38,7 +38,7 @@ export class NodeRefereeAPI {
    * @param tokenIds Array of node key IDs
    * @returns $TOPIA rewards that are claimable for given node key
    */
-  async claimableNodeKeyRewardsBatched(tokenIds: string[]): Promise<ethers.BigNumberish[]> {
+  async claimableNodeKeyRewardsBatched(tokenIds: number[]): Promise<ethers.BigNumberish[]> {
     return await this.nodeReferee.maxRewardsToClaimBatched(tokenIds)
   }
 
@@ -49,7 +49,7 @@ export class NodeRefereeAPI {
    * @param tokenId Node key ID
    * @returns Total $TOPIA rewards claimed by a given node key
    */
-  async claimedNodeKeyRewards(tokenId: string): Promise<ethers.BigNumberish> {
+  async claimedNodeKeyRewards(tokenId: number): Promise<ethers.BigNumberish> {
     return await this.nodeReferee.rewardClaimed(tokenId)
   }
 
@@ -58,7 +58,7 @@ export class NodeRefereeAPI {
    * @param tokenIds Array of node key IDs
    * @returns Total $TOPIA rewards claimed by all the provided node key IDs
    */
-  async claimedNodeKeyRewardsBatched(tokenIds: string[]): Promise<ethers.BigNumberish[]> {
+  async claimedNodeKeyRewardsBatched(tokenIds: number[]): Promise<ethers.BigNumberish[]> {
     return await this.nodeReferee.getRewardClaimedBatched(tokenIds)
   }
 
@@ -87,7 +87,7 @@ export class NodeRefereeAPI {
    * @param tokenId Node key ID
    * @returns Total number of assertions made by the node key
    */
-  async totalNodeKeyAssertions(tokenId: string): Promise<ethers.BigNumberish> {
+  async totalNodeKeyAssertions(tokenId: number): Promise<ethers.BigNumberish> {
     return await this.nodeReferee.numAssertions(tokenId)
   }
 }

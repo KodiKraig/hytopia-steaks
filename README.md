@@ -38,13 +38,92 @@ Install the library
 
 - [x] [Worlds Staking Contract](https://etherscan.io/address/0x2f53e033c55eb6c87cea259123c0a68ca3578426)
 - [x] [HYCHAIN Node Referee Contract](https://explorer.hychain.com/address/0x6c065572f1824171186aF6dF848313784d6E5b0E)
-- [ ] [HYCHAIN Node NFT Contract](https://explorer.hychain.com/address/0xE1060b30D9fF01Eef71248906Ce802801a670A48?)
+- [x] [HYCHAIN Node NFT Contract](https://explorer.hychain.com/address/0xE1060b30D9fF01Eef71248906Ce802801a670A48?)
 - [ ] [Worlds NFT Contract](https://etherscan.io/token/0x8d9710f0e193d3f95c0723eaaf1a81030dc9116d)
-- [ ] LP Staking Contract - TBD
 - [ ] Avatar Staking Contract - TBD
 - [ ] [Avatar NFT Contract](https://etherscan.io/address/0x05745e72fb8b4a9b51118a168d956760e4a36444)
+- [ ] LP Staking Contract - TBD
 
 ## API
+
+The APIs are a thin wrapper around the contracts designed to get you up and going quickly when directly interacting with the contracts.
+
+## HYCHAIN Node Referee API
+
+Create instance of the Node Referee contract
+
+```javascript
+    import { ethers } from 'ethers'
+    import { getHYCHAINNodeRefereeContract, HYCHAINNodeRefereeAPI } from 'hytopia-steaks'
+
+    const provider = new ethers.JsonRpcProvider('https://hychain.calderachain.xyz/http')
+    const contact = getHYCHAINNodeRefereeContract(provider)
+    const api = new HYCHAINNodeRefereeAPI(contact)
+```
+
+Get total rewards claimable for node key IDs
+
+```javascript
+    const batchedRewards = await api.claimableNodeKeyRewards([
+      100, 101, 102
+    ])
+
+    console.log(batchedRewards)
+    // [213123123, 1312312312, 23434534433] $TOPIA
+```
+
+Get total rewards claimed for node key IDs
+
+```javascript
+    const batchedRewards = await api.claimedNodeKeyRewardsBatched([
+      100, 101, 102
+    ])
+
+    console.log(batchedRewards)
+    // [3142313123, 53453453535, 2131342344] $TOPIA
+```
+
+Get the total assertions made by the node key token ID
+
+```javascript
+    const assertionCount = await api.totalNodeKeyAssertions(100)
+
+    console.log(assertionCount)
+    // 12
+```
+
+## HYCHAIN Node NFT API
+
+Create instance of the Node NFT contract
+
+```javascript
+    import { ethers } from 'ethers'
+    import { getHYCHAINNodeNFTContract, HYCHAINNodeKeyAPI } from 'hytopia-steaks'
+
+    const provider = new ethers.JsonRpcProvider('https://hychain.calderachain.xyz/http')
+    const contact = getHYCHAINNodeNFTContract(provider)
+    const api = new HYCHAINNodeKeyAPI(contact)
+```
+
+Get balance of Node keys by address
+
+```javascript
+    const nodeKeyOwnedCount = await api.balanceOf('0x122690b8525e6b33f38ff34bdd7644676d9d46d8')
+
+    console.log(nodeKeyOwnedCount)
+    // 3
+```
+
+Get Node key owner for token ID
+
+```javascript
+    const owner = await api.getNodeKeyOwner(2)
+
+    console.log(owner)
+    // 0x122690b8525e6b33f38ff34bdd7644676d9d46d8
+```
+
+## World API
 
 Create instance of the `WorldEscrowAPI`
 
