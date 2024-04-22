@@ -6,14 +6,16 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "baseUrl": ".",
     "experimentalDecorators": true,
     "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
+      "*": ["node_modules/*"]
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/_tests"],
 }
