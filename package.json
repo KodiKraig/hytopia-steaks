@@ -1,8 +1,8 @@
 {
   "name": "hytopia-steaks",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "HYTOPIA staking contract analyzer for stakable tokens within the HYTOPIA ecosystem.",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest --testPathPattern=\\.unit\\.test\\.ts$ --coverage",
