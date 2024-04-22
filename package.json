@@ -13,6 +13,14 @@
   },
   "author": "kodikraig",
   "license": "MIT",
+  "keywords": [
+    "ethereum",
+    "ethers",
+    "web3",
+    "staking",
+    "hytopia",
+    "hychain"
+  ],
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.30",
