@@ -1,6 +1,6 @@
 {
   "name": "hytopia-steaks",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "HYTOPIA staking contract analyzer for stakable tokens within the HYTOPIA ecosystem.",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",

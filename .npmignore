@@ -1,0 +1,18 @@
+# Ignore TypeScript config and caches
+tsconfig.*.json
+.github/**
+
+# Ignore admin scripts and files
+src/_tests/**
+
+# Testing
+.eslint*
+.prettierrc
+.jest.*
+.env
+
+# Ignore random junk
+.DS_Store
+node_modules/**
+misc/**
+.vscode/**
