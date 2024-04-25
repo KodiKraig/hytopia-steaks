@@ -34,7 +34,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns Owner of the node key
    */
   async getNodeKeyOwner(tokenId: number): Promise<string> {
-    return (await this.hychainNodeKey.ownerOf(tokenId)).toString().toLowerCase()
+    return await this.hychainNodeKey.ownerOf(tokenId)
   }
 
   /**

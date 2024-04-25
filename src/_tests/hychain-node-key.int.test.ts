@@ -14,7 +14,7 @@ describe("HYCHAINNodeKeyAPI", () => {
   })
 
   it("should get the balance of the owner", async () => {
-    const balance = await api.balanceOf(process.env.TEST_NODE_KEY_OWNER_ADDRESS)
+    const balance = await api.balanceOf(process.env.TEST_NODE_KEY_OWNER_ADDRESS!)
     expect(balance).toEqual(3)
   })
 
