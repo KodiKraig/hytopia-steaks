@@ -64,21 +64,52 @@ export class HYCHAINNodeKeyAPI {
   }
 
   /**
-   * All the current node key owners with their related transfer events
+   * Get all the current node key owners with their related transfer events.
+   * If event was removed then it will not be included in the result.
+   * If a token was transferred multiple times, the latest transfer event will be used.
    * @param fromBlock starting block number
    * @param toBlock ending block number
    * @returns Node key owners with their related transfer events
    */
-  async getNodeKeyOwnersByEvents(
-    fromBlock?: BlockTag,
-    toBlock?: BlockTag,
-  ): Promise<OwnerTransferEvent[]> {
+  async getOwnersByEvents(fromBlock?: BlockTag, toBlock?: BlockTag): Promise<OwnerTransferEvent[]> {
     const events = await this.getTransferEvents(fromBlock, toBlock)
 
     let ownerEvents: OwnerTransferEvent[] = []
 
     for (const event of events) {
+      // Skip removed events
+      if (event.removed) continue
+
+      // Handle prior transfer events
+      const previousOwner = ownerEvents.find((ownerEvent) =>
+        ownerEvent.tokenIds.includes(event.tokenId),
+      )
+      if (previousOwner) {
+        // Token has been transferred before. Determine the new owner
+        const previousEvent = previousOwner.events.find((e) => e.tokenId === event.tokenId)
+
+        if (event.blockNumber > previousEvent.blockNumber) {
+          // Remove the old owner
+          if (previousOwner.tokenIds.length === 1) {
+            // Previous owner only has one token. Remove entirely.
+            const index = ownerEvents.indexOf(previousOwner)
+            ownerEvents.splice(index, 1)
+          } else {
+            // Previous owner has multiple tokens. Remove the token from the owner.
+            const tokenIndex = previousOwner.tokenIds.indexOf(event.tokenId)
+            previousOwner.tokenIds.splice(tokenIndex, 1)
+            const eventIndex = previousOwner.events.indexOf(previousEvent)
+            previousOwner.events.splice(eventIndex, 1)
+          }
+        } else {
+          // The previous owner is still the owner based on the block
+          continue // Drop this event since it is irrelevant
+        }
+      }
+
+      // Add the new token event
       const ownerEvent = ownerEvents.find((ownerEvent) => ownerEvent.owner === event.to)
+
       if (ownerEvent) {
         ownerEvent.tokenIds.push(event.tokenId)
         ownerEvent.events.push(event)
@@ -89,6 +120,8 @@ export class HYCHAINNodeKeyAPI {
           events: [event],
         })
       }
+
+      ownerEvents[ownerEvents.length - 1].tokenIds.sort((a, b) => a - b)
     }
 
     return ownerEvents

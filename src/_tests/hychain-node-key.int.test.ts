@@ -50,7 +50,7 @@ describe("HYCHAINNodeKeyAPI", () => {
   })
 
   it("should get the node key owners by transfer events", async () => {
-    const owners = await api.getNodeKeyOwnersByEvents(300946, 337041)
+    const owners = await api.getOwnersByEvents(300946, 337041)
     expect(owners).toEqual(OWNER_TRANSFER_EVENTS)
   })
 })
