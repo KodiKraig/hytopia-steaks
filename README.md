@@ -57,7 +57,8 @@ Create instance of the Node Referee contract.
 
 ```javascript
     import { ethers } from 'ethers'
-    import { getHYCHAINNodeRefereeContract, HYCHAINNodeRefereeAPI } from 'hytopia-steaks'
+    import { getHYCHAINNodeRefereeContract } from 'hytopia-steaks/contracts/hychain-node-referee-contract'
+    import { HYCHAINNodeRefereeAPI } from 'hytopia-steaks'
 
     const provider = new ethers.JsonRpcProvider('https://hychain.calderachain.xyz/http')
     const contact = getHYCHAINNodeRefereeContract(provider)
@@ -101,7 +102,8 @@ Create instance of the Node NFT contract
 
 ```javascript
     import { ethers } from 'ethers'
-    import { getHYCHAINNodeNFTContract, HYCHAINNodeKeyAPI } from 'hytopia-steaks'
+    import { getHYCHAINNodeNFTContract } from 'hytopia-steaks/contracts/hychain-node-key-contract'
+    import { HYCHAINNodeKeyAPI } from 'hytopia-steaks'
 
     const provider = new ethers.JsonRpcProvider('https://hychain.calderachain.xyz/http')
     const contact = getHYCHAINNodeNFTContract(provider)
@@ -132,7 +134,8 @@ Create instance of the `WorldEscrowAPI`
 
 ```javascript
     import { ethers } from 'ethers'
-    import { getWorldEscrowContract, WorldEscrowAPI } from 'hytopia-steaks'
+    import { getWorldEscrowContract } from 'hytopia-steaks/contracts/world-escrow-contract'
+    import { WorldEscrowAPI } from 'hytopia-steaks'
 
     const provider = new ethers.InfuraProvider("mainnet", "<Your Infura Project ID>")
     const contract = getWorldEscrowContract(provider)
