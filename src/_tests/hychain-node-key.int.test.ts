@@ -1,6 +1,6 @@
 import { ethers } from "ethers"
 import { HYCHAINNodeKeyAPI, OwnerTransferEvent, TransferEvent } from "../hychain-node-key"
-import { getHYCHAINNodeNFTContract } from "../contracts/hychain-node-nft"
+import { getHYCHAINNodeNFTContract } from "../contracts/hychain-node-key-contract"
 
 const NODE_KEY_ID = Number(process.env.TEST_NODE_ID_WITH_REWARDS)
 

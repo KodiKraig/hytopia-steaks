@@ -1,5 +1,5 @@
 import { ethers } from "ethers"
-import { getHYCHAINNodeRefereeContract } from "../contracts/hychain-node-referee"
+import { getHYCHAINNodeRefereeContract } from "../contracts/hychain-node-referee-contract"
 import { HYCHAINNodeRefereeAPI } from "../hychain-node-referee"
 
 const NODE_KEY_ID = Number(process.env.TEST_NODE_ID_WITH_REWARDS)
