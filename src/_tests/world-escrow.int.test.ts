@@ -1,6 +1,7 @@
 import { ethers } from "ethers"
 import { WorldEscrowAPI, WorldStakeEvent } from "../world-escrow"
 import { getWorldEscrowContract } from "../contracts/world-escrow-contract"
+import { TEST_OWNER_WORLD_ADDRESS, TEST_OWNER_WORLD_TOKEN_ID } from "./constants"
 
 const STARTING_BLOCK = 19521249
 const ENDING_BLOCK = 19539433
@@ -17,28 +18,24 @@ describe("WorldEscrowAPI", () => {
   /// World Info
 
   it("should get world info", async () => {
-    const worldInfo = await worldEscrowAPI.getWorldInfo(
-      Number(process.env.TEST_OWNER_WORLD_TOKEN_ID),
-    )
+    const worldInfo = await worldEscrowAPI.getWorldInfo(TEST_OWNER_WORLD_TOKEN_ID)
 
     expect(worldInfo).toBeDefined()
-    expect(worldInfo.owner).toBe(process.env.TEST_OWNER_WORLD_ADDRESS)
+    expect(worldInfo.owner).toBe(TEST_OWNER_WORLD_ADDRESS)
   })
 
   /// User
 
   it("should get user staked tokens", async () => {
-    const stakedTokens = await worldEscrowAPI.getUserStakedTokens(
-      process.env.TEST_OWNER_WORLD_ADDRESS!,
-    )
+    const stakedTokens = await worldEscrowAPI.getUserStakedTokens(TEST_OWNER_WORLD_ADDRESS)
 
     expect(stakedTokens).toBeDefined()
     expect(stakedTokens.length).toBeGreaterThan(0)
-    expect(stakedTokens).toContain(Number(process.env.TEST_OWNER_WORLD_TOKEN_ID))
+    expect(stakedTokens).toContain(TEST_OWNER_WORLD_TOKEN_ID)
   })
 
   it("should check user rewards", async () => {
-    const userRewards = await worldEscrowAPI.checkUserRewards(process.env.TEST_OWNER_WORLD_ADDRESS!)
+    const userRewards = await worldEscrowAPI.checkUserRewards(TEST_OWNER_WORLD_ADDRESS)
 
     expect(Number(userRewards)).toBeGreaterThan(0)
   })

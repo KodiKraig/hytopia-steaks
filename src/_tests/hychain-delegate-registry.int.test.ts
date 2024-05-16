@@ -1,9 +1,13 @@
 import { ethers } from "ethers"
 import { getHYCHAINDelegateRegistryContract } from "../contracts/hychain-delegate-registry-contract"
 import { HYCHAINDelegateRegistryAPI } from "../hychain-delegate-registry"
+import {
+  TEST_DELEGATE_REGISTRY_ADDRESS_NO_DELEGATIONS,
+  TEST_DELEGATE_REGISTRY_ADDRESS_WITH_OUTGOING,
+} from "./constants"
 
-const DELEGATION_OUTGOING = process.env.TEST_DELEGATE_REGISTRY_ADDRESS_WITH_OUTGOING!
-const NO_DELEGATION = process.env.TEST_DELEGATE_REGISTRY_ADDRESS_NO_DELEGATIONS!
+const DELEGATION_OUTGOING = TEST_DELEGATE_REGISTRY_ADDRESS_WITH_OUTGOING
+const NO_DELEGATION = TEST_DELEGATE_REGISTRY_ADDRESS_NO_DELEGATIONS
 
 describe("HYCHAIN Delegate Registry", () => {
   var api: HYCHAINDelegateRegistryAPI

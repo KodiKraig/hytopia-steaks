@@ -1,8 +1,9 @@
 import { ethers } from "ethers"
 import { HYCHAINNodeKeyAPI, OwnerTransferEvent, TransferEvent } from "../hychain-node-key"
 import { getHYCHAINNodeNFTContract } from "../contracts/hychain-node-key-contract"
+import { TEST_NODE_ID_WITH_REWARDS, TEST_NODE_KEY_OWNER_ADDRESS } from "./constants"
 
-const NODE_KEY_ID = Number(process.env.TEST_NODE_ID_WITH_REWARDS)
+const NODE_KEY_ID = TEST_NODE_ID_WITH_REWARDS
 
 describe("HYCHAINNodeKeyAPI", () => {
   var api: HYCHAINNodeKeyAPI
@@ -14,13 +15,13 @@ describe("HYCHAINNodeKeyAPI", () => {
   })
 
   it("should get the balance of the owner", async () => {
-    const balance = await api.balanceOf(process.env.TEST_NODE_KEY_OWNER_ADDRESS!)
+    const balance = await api.balanceOf(TEST_NODE_KEY_OWNER_ADDRESS)
     expect(balance).toEqual(3)
   })
 
   it("should get the owner of the node key", async () => {
     const owner = await api.getNodeKeyOwner(NODE_KEY_ID)
-    expect(owner).toEqual(process.env.TEST_NODE_KEY_OWNER_ADDRESS)
+    expect(owner).toEqual(TEST_NODE_KEY_OWNER_ADDRESS)
   })
 
   it("should get the name of the token", async () => {
