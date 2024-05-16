@@ -2,6 +2,7 @@ import { ethers } from "ethers"
 import nodeReferee from "./json/node-referee-contract.json"
 import worldEscrow from "./json/world-escrow-contract.json"
 import nodeNFT from "./json/hychain-node-key-contract.json"
+import delegateRegistry from "./json/hychain-delegate-registry-contract.json"
 
 export const getWorldEscrowContract = (provider: ethers.Provider): ethers.Contract => {
   return new ethers.Contract(worldEscrow.contract.address, worldEscrow.contract.abi, provider)
@@ -13,4 +14,12 @@ export const getHYCHAINNodeRefereeContract = (provider: ethers.Provider): ethers
 
 export const getHYCHAINNodeNFTContract = (provider: ethers.Provider): ethers.Contract => {
   return new ethers.Contract(nodeNFT.contract.address, nodeNFT.contract.abi, provider)
+}
+
+export const getHYCHAINDelegateRegistryContract = (provider: ethers.Provider): ethers.Contract => {
+  return new ethers.Contract(
+    delegateRegistry.contract.address,
+    delegateRegistry.contract.abi,
+    provider,
+  )
 }
