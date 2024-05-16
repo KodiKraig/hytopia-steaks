@@ -1,5 +1,5 @@
 # Keep environment variables out of version control
-.env*
+.env
 
 # Swagger JSON
 /public/swagger.json

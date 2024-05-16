@@ -1,4 +1,4 @@
-import { ethers, Result } from "ethers"
+import { ethers } from "ethers"
 import { HYCHAINNodeKeyAPI, OwnerTransferEvent, TransferEvent } from "../hychain-node-key"
 import { MockProxy, mock } from "jest-mock-extended"
 

@@ -39,6 +39,7 @@ Install the library
 - [x] [Worlds Staking Contract](https://etherscan.io/address/0x2f53e033c55eb6c87cea259123c0a68ca3578426)
 - [x] [HYCHAIN Node Referee Contract](https://explorer.hychain.com/address/0x6c065572f1824171186aF6dF848313784d6E5b0E)
 - [x] [HYCHAIN Node NFT Contract](https://explorer.hychain.com/address/0xE1060b30D9fF01Eef71248906Ce802801a670A48?)
+- [x] [HYCHAIN Delegate Registry Contract](https://explorer.hychain.com/address/0x00000000000000447e69651d841bD8D104Bed493)
 - [ ] [Worlds NFT Contract](https://etherscan.io/token/0x8d9710f0e193d3f95c0723eaaf1a81030dc9116d)
 - [ ] Avatar Staking Contract - TBD
 - [ ] [Avatar NFT Contract](https://etherscan.io/address/0x05745e72fb8b4a9b51118a168d956760e4a36444)
@@ -210,13 +211,7 @@ If you are interested in contributing then please feel free to clone and submit 
 
 In order to run the integration tests locally you must provide an [INFURA](https://app.infura.io/) API key along with a few `.env` variables.
 
-1. Create a .env file and add the following variables:
-    - `INFURA_PROJECT_ID=<Your API Key>`
-    - `HYCHAIN_JSON_RPC_URL=https://hychain.calderachain.xyz/http`
-    - `TEST_OWNER_WORLD_ADDRESS=<Address owning a HYTOPIA world token>`
-    - `TEST_OWNER_WORLD_TOKEN_ID=<TokenId that is currently staked by the above owner address>`
-    - `TEST_NODE_KEY_OWNER_ADDRESS=<Address owning at least one Node Key>`
-    - `TEST_NODE_ID_WITH_REWARDS=<TokenId that currently has rewards claimed and claimable>`
+1. Create a .env file from the ```.env.example```
 
 2. Run the integration tests:
     - `npm run test:integration`

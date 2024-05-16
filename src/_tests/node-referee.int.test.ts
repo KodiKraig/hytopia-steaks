@@ -1,8 +1,9 @@
 import { ethers } from "ethers"
-import { getHYCHAINNodeRefereeContract } from "../contracts"
+import { getHYCHAINNodeRefereeContract } from "../contracts/hychain-node-referee-contract"
 import { HYCHAINNodeRefereeAPI } from "../hychain-node-referee"
+import { TEST_NODE_ID_WITH_REWARDS } from "./constants"
 
-const NODE_KEY_ID = Number(process.env.TEST_NODE_ID_WITH_REWARDS)
+const NODE_KEY_ID = TEST_NODE_ID_WITH_REWARDS
 
 describe("NodeRefereeAPI", () => {
   var api: HYCHAINNodeRefereeAPI
