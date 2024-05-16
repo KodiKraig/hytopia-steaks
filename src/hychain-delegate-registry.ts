@@ -1,12 +1,6 @@
-import { Contract } from "ethers"
+import { BaseContractAPI } from "./contracts/base-contract-api"
 
-export class HYCHAINDelegateRegistryAPI {
-  protected contract: Contract
-
-  constructor(contract: Contract) {
-    this.contract = contract
-  }
-
+export class HYCHAINDelegateRegistryAPI extends BaseContractAPI {
   /// Outgoing
 
   /**
