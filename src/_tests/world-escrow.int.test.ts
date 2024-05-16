@@ -1,6 +1,6 @@
 import { ethers } from "ethers"
 import { WorldEscrowAPI, WorldStakeEvent } from "../world-escrow"
-import { getWorldEscrowContract } from "../contracts"
+import { getWorldEscrowContract } from "../contracts/world-escrow"
 
 const STARTING_BLOCK = 19521249
 const ENDING_BLOCK = 19539433
@@ -29,7 +29,7 @@ describe("WorldEscrowAPI", () => {
 
   it("should get user staked tokens", async () => {
     const stakedTokens = await worldEscrowAPI.getUserStakedTokens(
-      process.env.TEST_OWNER_WORLD_ADDRESS,
+      process.env.TEST_OWNER_WORLD_ADDRESS!,
     )
 
     expect(stakedTokens).toBeDefined()
@@ -38,7 +38,7 @@ describe("WorldEscrowAPI", () => {
   })
 
   it("should check user rewards", async () => {
-    const userRewards = await worldEscrowAPI.checkUserRewards(process.env.TEST_OWNER_WORLD_ADDRESS)
+    const userRewards = await worldEscrowAPI.checkUserRewards(process.env.TEST_OWNER_WORLD_ADDRESS!)
 
     expect(Number(userRewards)).toBeGreaterThan(0)
   })

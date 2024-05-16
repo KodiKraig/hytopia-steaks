@@ -1,5 +1,5 @@
 import { ethers } from "ethers"
-import { getHYCHAINDelegateRegistryContract } from "../contracts"
+import { getHYCHAINDelegateRegistryContract } from "../contracts/hychain-delegate-registry"
 import { HYCHAINDelegateRegistryAPI } from "../hychain-delegate-registry"
 
 const DELEGATION_OUTGOING = process.env.TEST_DELEGATE_REGISTRY_ADDRESS_WITH_OUTGOING!
