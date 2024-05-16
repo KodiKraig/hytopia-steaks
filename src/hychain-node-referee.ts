@@ -1,16 +1,11 @@
 import { ethers } from "ethers"
+import { BaseContractAPI } from "./contracts/base-contract-api"
 
 /**
  * NodeRefereeAPI is a class that provides an interface to interact with the HYCHAIN NodeReferee contract
  * @param contract NodeReferee contract instance
  */
-export class HYCHAINNodeRefereeAPI {
-  private nodeReferee: ethers.Contract
-
-  constructor(contract: ethers.Contract) {
-    this.nodeReferee = contract
-  }
-
+export class HYCHAINNodeRefereeAPI extends BaseContractAPI {
   /// Status
 
   /**
@@ -19,7 +14,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns True if the node key is revoked, false otherwise
    */
   async isNodeKeyRevoked(tokenId: number): Promise<boolean> {
-    return await this.nodeReferee.isNodeKeyRevoked(tokenId)
+    return await this.contract.isNodeKeyRevoked(tokenId)
   }
 
   /// Claimable $TOPIA Rewards
@@ -30,7 +25,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns $TOPIA rewards that are claimable for given node key
    */
   async claimableNodeKeyRewards(tokenId: number): Promise<ethers.BigNumberish> {
-    return await this.nodeReferee.maxRewardsToClaim(tokenId)
+    return await this.contract.maxRewardsToClaim(tokenId)
   }
 
   /**
@@ -39,7 +34,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns $TOPIA rewards that are claimable for given node key
    */
   async claimableNodeKeyRewardsBatched(tokenIds: number[]): Promise<ethers.BigNumberish[]> {
-    return await this.nodeReferee.maxRewardsToClaimBatched(tokenIds)
+    return await this.contract.maxRewardsToClaimBatched(tokenIds)
   }
 
   /// Claimed $TOPIA Rewards
@@ -50,7 +45,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns Total $TOPIA rewards claimed by a given node key
    */
   async claimedNodeKeyRewards(tokenId: number): Promise<ethers.BigNumberish> {
-    return await this.nodeReferee.rewardClaimed(tokenId)
+    return await this.contract.rewardClaimed(tokenId)
   }
 
   /**
@@ -59,7 +54,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns Total $TOPIA rewards claimed by all the provided node key IDs
    */
   async claimedNodeKeyRewardsBatched(tokenIds: number[]): Promise<ethers.BigNumberish[]> {
-    return await this.nodeReferee.getRewardClaimedBatched(tokenIds)
+    return await this.contract.getRewardClaimedBatched(tokenIds)
   }
 
   /// $TOPIA Rewards
@@ -69,7 +64,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns Total $TOPIA rewards
    */
   async totalRewardsDistributed(): Promise<ethers.BigNumberish> {
-    return await this.nodeReferee.rewardDistributed()
+    return await this.contract.rewardDistributed()
   }
 
   /**
@@ -77,7 +72,7 @@ export class HYCHAINNodeRefereeAPI {
    * @returns $TOPIA rewards generated
    */
   async rewardsPerSecond(): Promise<ethers.BigNumberish> {
-    return await this.nodeReferee.rewardPerSecond()
+    return await this.contract.rewardPerSecond()
   }
 
   /// Assertions
@@ -88,6 +83,6 @@ export class HYCHAINNodeRefereeAPI {
    * @returns Total number of assertions made by the node key
    */
   async totalNodeKeyAssertions(tokenId: number): Promise<ethers.BigNumberish> {
-    return await this.nodeReferee.numAssertions(tokenId)
+    return await this.contract.numAssertions(tokenId)
   }
 }

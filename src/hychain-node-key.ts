@@ -1,22 +1,17 @@
 import { BlockTag, ethers } from "ethers"
+import { BaseContractAPI } from "./contracts/base-contract-api"
 
 /**
  * API for interacting with the HYCHAIN Node Key L2 contract
  */
-export class HYCHAINNodeKeyAPI {
-  private hychainNodeKey: ethers.Contract
-
-  constructor(contract: ethers.Contract) {
-    this.hychainNodeKey = contract
-  }
-
+export class HYCHAINNodeKeyAPI extends BaseContractAPI {
   /**
    * Get the current token balance of the owner
    * @param owner Owner address of the tokens
    * @returns Current token balance of the owner
    */
   async balanceOf(owner: string): Promise<number> {
-    const count = await this.hychainNodeKey.balanceOf(owner)
+    const count = await this.contract.balanceOf(owner)
     return Number(count)
   }
 
@@ -25,7 +20,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns Name of the token
    */
   async getName(): Promise<string> {
-    return this.hychainNodeKey.name()
+    return this.contract.name()
   }
 
   /**
@@ -34,7 +29,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns Owner of the node key
    */
   async getNodeKeyOwner(tokenId: number): Promise<string> {
-    return await this.hychainNodeKey.ownerOf(tokenId)
+    return await this.contract.ownerOf(tokenId)
   }
 
   /**
@@ -42,7 +37,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns Symbol of the token
    */
   async getTokenSymbol(): Promise<string> {
-    return this.hychainNodeKey.symbol()
+    return this.contract.symbol()
   }
 
   /**
@@ -51,7 +46,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns TokenURI of the token
    */
   async getTokenURI(tokenId: number): Promise<string> {
-    return this.hychainNodeKey.tokenURI(tokenId)
+    return this.contract.tokenURI(tokenId)
   }
 
   /**
@@ -59,7 +54,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns Current total supply of the token
    */
   async getTotalSupply(): Promise<number> {
-    const count = await this.hychainNodeKey.totalSupply()
+    const count = await this.contract.totalSupply()
     return Number(count)
   }
 
@@ -134,7 +129,7 @@ export class HYCHAINNodeKeyAPI {
    * @returns all TransferEvents within the given block range
    */
   async getTransferEvents(fromBlock?: BlockTag, toBlock?: BlockTag): Promise<TransferEvent[]> {
-    const events = await this.hychainNodeKey.queryFilter("Transfer", fromBlock, toBlock)
+    const events = await this.contract.queryFilter("Transfer", fromBlock, toBlock)
     return events
       .map((event) => event as ethers.EventLog)
       .map((event) => {

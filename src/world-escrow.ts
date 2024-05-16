@@ -1,4 +1,5 @@
 import { BlockTag, ethers } from "ethers"
+import { BaseContractAPI } from "./contracts/base-contract-api"
 
 export interface WorldInfo {
   // weight based on rarity
@@ -44,13 +45,7 @@ export interface WorldStakeEvent {
  * World Escrow wrapper API for interacting with the World Escrow contract via ethers.js
  * @param contract WorldEscrow contract instance
  */
-export class WorldEscrowAPI {
-  private worldsEscrow: ethers.Contract
-
-  constructor(contract: ethers.Contract) {
-    this.worldsEscrow = contract
-  }
-
+export class WorldEscrowAPI extends BaseContractAPI {
   /// World Info
 
   /**
@@ -59,7 +54,7 @@ export class WorldEscrowAPI {
    * @returns WorldInfo representing the given token ID
    */
   async getWorldInfo(tokenId: number): Promise<WorldInfo> {
-    return this.worldsEscrow.getWorldInfo(tokenId)
+    return this.contract.getWorldInfo(tokenId)
   }
 
   /// User
@@ -70,7 +65,7 @@ export class WorldEscrowAPI {
    * @returns $TOPIA rewards that are claimable for given address
    */
   async checkUserRewards(user: string): Promise<ethers.BigNumberish> {
-    return this.worldsEscrow.checkUserRewards(user)
+    return this.contract.checkUserRewards(user)
   }
 
   /**
@@ -79,7 +74,7 @@ export class WorldEscrowAPI {
    * @returns Array of staked tokens for the given user
    */
   async getUserStakedTokens(user: string): Promise<number[]> {
-    const result = await this.worldsEscrow.userStakedWorlds(user)
+    const result = await this.contract.userStakedWorlds(user)
     return result.map((tokenId: string) => Number(tokenId))
   }
 
@@ -136,7 +131,7 @@ export class WorldEscrowAPI {
     fromBlock?: BlockTag,
     toBlock?: BlockTag,
   ): Promise<WorldStakeEvent[]> {
-    const events = await this.worldsEscrow.queryFilter(event, fromBlock, toBlock)
+    const events = await this.contract.queryFilter(event, fromBlock, toBlock)
     return events
       .map((event) => event as ethers.EventLog)
       .map((event) => {
