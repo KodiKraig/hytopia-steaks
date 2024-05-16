@@ -1,7 +1,6 @@
 import { ethers } from "ethers"
 import { getHYCHAINDelegateRegistryContract } from "../contracts"
 import { HYCHAINDelegateRegistryAPI } from "../hychain-delegate-registry"
-import exp from "constants"
 
 const DELEGATION_OUTGOING = process.env.TEST_DELEGATE_REGISTRY_ADDRESS_WITH_OUTGOING!
 const NO_DELEGATION = process.env.TEST_DELEGATE_REGISTRY_ADDRESS_NO_DELEGATIONS!
